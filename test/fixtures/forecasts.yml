@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  currently: MyText
+  minutely: MyText
+  hourly: MyText
+  daily: MyText
+  location_id: 
+
+two:
+  currently: MyText
+  minutely: MyText
+  hourly: MyText
+  daily: MyText
+  location_id: 
