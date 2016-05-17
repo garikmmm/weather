@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   root 'weather#index'
 
   get 'weather/index'
-  get 'forecast/:postal_code' => 'weather#forecast'
+  # get 'forecast/:postal_code' => 'weather#forecast', as: :get_forecast
+  get 'forecast' => 'weather#forecast', as: :get_forecast
   get 'search_location/(:query)' => 'weather#autocomplete', as: :search_location
 
   # The priority is based upon order of creation: first created -> highest priority.

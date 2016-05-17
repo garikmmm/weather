@@ -1,5 +1,5 @@
 module Entity
   class Forecast
-    attr_accessor :currently, :minutely, :hourly, :daily, :postal_code
+    attr_accessor :currently, :minutely, :hourly, :daily, :location_id
   end
 end

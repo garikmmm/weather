@@ -9,7 +9,7 @@ class Forecast < ActiveRecord::Base
       entity.minutely = JSON.parse(info_from_db.minutely)
       entity.hourly = JSON.parse(info_from_db.hourly)
       entity.daily = JSON.parse(info_from_db.daily)
-      entity.postal_code = info_from_db.postal_code
+      entity.location_id = info_from_db.location_id
       entity
     else
       nil
@@ -22,7 +22,8 @@ class Forecast < ActiveRecord::Base
     self.minutely = JSON.generate(forecast_entity.minutely)
     self.hourly = JSON.generate(forecast_entity.hourly)
     self.daily = JSON.generate(forecast_entity.daily)
-    self.postal_code = forecast_entity.postal_code
+    self.location_id = forecast_entity.location_id
+    self.location_id = forecast_entity.location_id
     self.save
   end
 end

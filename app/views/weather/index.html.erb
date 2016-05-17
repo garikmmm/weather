@@ -1,5 +1,12 @@
-<%= form_tag("/search", method: "get") do %>
-      <%= label_tag(:q, "Search for:") %>
-      <%= text_field_tag(:q) %>
-      <%= submit_tag("Search") %>
+<%= form_tag(get_forecast_path(format: :json), method: "get", remote: true, :id => 'forecast-form') do %>
+      <%= label_tag(:location_id, "Location:") %>
+      <%= select_tag(:location_id) %>
+      <%= label_tag(:geolocation_method, "Geolocation method:") %>
+      <%= select_tag :geolocation_method, options_for_select([ ["Database", 1], ["Google Maps", 2] ], 1) %>
+      <br />
+      <%= submit_tag("Show results") %>
 <% end %>
+
+<div id="forecast-response">
+
+</div>
