@@ -20,12 +20,69 @@ $(function() {
         }
     });
 
-  $('#forecast-form').on('ajax:success', function(event, data) {
-    $("#forecast-response").text(JSON.stringify(data));
+  $('#forecast-form').on('ajax:success', function(event, response, status, xhr) {
+    $("#forecast-info").show();
+    $('#forecast-info .nav-tabs a[href="#forecast-tab-currently"]').tab('show');
+    if (response.status) {
+      if (response.data.currently) {
+        var currently_html = '<ul class="list-group">';
+        currently_html += get_forecast_line_with_badge('Summary', response.data.currently.summary);
+        currently_html += get_forecast_line_with_badge('WindSpeed', response.data.currently.windSpeed);
+        currently_html += get_forecast_line_with_badge('Pressure', response.data.currently.pressure);
+        currently_html += get_forecast_line_with_badge('Humidity', response.data.currently.humidity);
+        currently_html += '</ul>';
+        $("#forecast-info #forecast-tab-currently").html(currently_html);
+      } else {
+        $("#forecast-info #forecast-tab-currently").html("Info is missing from API call");
+      }
+
+      if (response.data.daily) {
+        var daily_html = '<table class="table">\
+            <thead>\
+              <tr>\
+                <th colspan="2">' + response.data.daily.summary + '</th>\
+              </tr>\
+            </thead>\
+            <tbody>';
+        for(var v in response.data.daily.data) {
+          daily_html += get_forecast_table_row(response.data.daily.data[v]);
+        }
+        daily_html += '</tbody> \
+        </table>';
+
+        $("#forecast-info #forecast-tab-daily").html(daily_html);
+      } else {
+        $("#forecast-info #forecast-tab-currently").html("Info is missing from API call");
+      }
+
+    } else {
+      $("#forecast-info").hide();
+      alert('No data for choosen place');
+    }
+
   });
-  $('#forecast-form').on('ajax:error', function(xhr, status, error) {
-    $("#forecast-response").text('');
+  $('#forecast-form').on('ajax:error', function(e, xhr, status, error) {
+    $("#forecast-info").hide();
     alert(error);
   });
 });
+
+function get_forecast_line_with_badge(text, value) {
+  return '<li class="list-group-item"><span class="badge">' + value + '</span>' + text + '</li>';
+}
+function get_forecast_table_row(item) {
+  var date = new Date(item.time * 1000);
+  var html = '<tr><td>' + date.toDateString() + '</td><td>';
+
+  var details = item.summary;
+  details += '<ul class="list-group">';
+  details += get_forecast_line_with_badge('WindSpeed', item.windSpeed);
+  details += get_forecast_line_with_badge('Pressure', item.pressure);
+  details += get_forecast_line_with_badge('Humidity', item.humidity);
+  details += '</ul>';
+
+  html += details;
+  html += '</td></tr>';
+  return html;
+}
 

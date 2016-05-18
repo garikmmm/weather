@@ -1,12 +1,26 @@
-<%= form_tag(get_forecast_path(format: :json), method: "get", remote: true, :id => 'forecast-form') do %>
-      <%= label_tag(:location_id, "Location:") %>
-      <%= select_tag(:location_id) %>
-      <%= label_tag(:geolocation_method, "Geolocation method:") %>
-      <%= select_tag :geolocation_method, options_for_select([ ["Database", 1], ["Google Maps", 2] ], 1) %>
-      <br />
-      <%= submit_tag("Show results") %>
-<% end %>
-
-<div id="forecast-response">
-
+<div class="row">
+  <div class="col-md-offset-2 col-md-8">
+    <%= form_tag(get_forecast_path(format: :json), method: "get", remote: true, :id => 'forecast-form') do %>
+          <%= label_tag(:location_id, "Location:") %>
+          <%= select_tag(:location_id) %>
+        <%= label_tag(:geolocation_method, "Geolocation method:") %>
+          <%= select_tag :geolocation_method, options_for_select([["Database", 1], ["Google Maps", 2]], 1) %>
+        <br/>
+          <%= submit_tag("Show results") %>
+    <% end %>
+    <br/>
+    <div id="forecast-info" style="display: none">
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+          <a href="#forecast-tab-currently" aria-controls="forecast-tab-currently" role="tab" data-toggle="tab">Currently</a>
+        </li>
+        <li role="presentation">
+          <a href="#forecast-tab-daily" aria-controls="forecast-tab-daily" role="tab" data-toggle="tab">Daily</a></li>
+      </ul>
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="forecast-tab-currently"></div>
+        <div role="tabpanel" class="tab-pane" id="forecast-tab-daily"></div>
+      </div>
+    </div>
+  </div>
 </div>
