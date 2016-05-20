@@ -24,6 +24,7 @@ $(function() {
     $("#forecast-info").show();
     $('#forecast-info .nav-tabs a[href="#forecast-tab-currently"]').tab('show');
     if (response.status) {
+      $currentTab = $("#forecast-info #forecast-tab-currently");
       if (response.data.currently) {
         var currently_html = '<ul class="list-group">';
         currently_html += get_forecast_line_with_badge('Summary', response.data.currently.summary);
@@ -31,9 +32,9 @@ $(function() {
         currently_html += get_forecast_line_with_badge('Pressure', response.data.currently.pressure);
         currently_html += get_forecast_line_with_badge('Humidity', response.data.currently.humidity);
         currently_html += '</ul>';
-        $("#forecast-info #forecast-tab-currently").html(currently_html);
+        $currentTab.html(currently_html);
       } else {
-        $("#forecast-info #forecast-tab-currently").html("Info is missing from API call");
+        $currentTab.html("Info is missing from API call");
       }
 
       if (response.data.daily) {
@@ -52,7 +53,7 @@ $(function() {
 
         $("#forecast-info #forecast-tab-daily").html(daily_html);
       } else {
-        $("#forecast-info #forecast-tab-currently").html("Info is missing from API call");
+        $currentTab.html("Info is missing from API call");
       }
 
     } else {

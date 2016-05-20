@@ -1,16 +1,17 @@
 module ForecastLib
   class Client
+
     def get_forecast(location_id, geolocation_method)
       location_exists = Location.exists?(location_id)
-      if 1 == geolocation_method.to_i and location_exists
-        location = Location.find location_id
+      if geolocation_method && location_exists
+        location = Location.find(location_id)
         location_name = location.name
         latlng_entity = Entity::LatLng.new
         latlng_entity.latitude = location.latitude
         latlng_entity.longitude = location.longitude
       else
         if location_exists
-          location = Location.find location_id
+          location = Location.find(location_id)
           location_name = location.name
         else
           location_name = location_id

@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root 'weather#index'
 
   get 'weather/index'
+  get 'home_react' => 'weather#index_react', as: :home_react
+
   # get 'forecast/:postal_code' => 'weather#forecast', as: :get_forecast
   get 'forecast' => 'weather#forecast', as: :get_forecast
   get 'search_location/(:query)' => 'weather#autocomplete', as: :search_location

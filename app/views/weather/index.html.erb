@@ -1,12 +1,12 @@
 <div class="row">
   <div class="col-md-offset-2 col-md-8">
     <%= form_tag(get_forecast_path(format: :json), method: "get", remote: true, :id => 'forecast-form') do %>
-          <%= label_tag(:location_id, "Location:") %>
-          <%= select_tag(:location_id) %>
-        <%= label_tag(:geolocation_method, "Geolocation method:") %>
-          <%= select_tag :geolocation_method, options_for_select([["Database", 1], ["Google Maps", 2]], 1) %>
-        <br/>
-          <%= submit_tag("Show results") %>
+      <%= label_tag(:location_id, "Location:") %>
+      <%= select_tag(:location_id) %>
+      <%= label_tag(:geolocation_method, "Geolocation method:") %>
+      <%= select_tag :geolocation_method, options_for_select([["Database", 1], ["Google Maps", 2]], 1) %>
+      <br/>
+      <%= submit_tag("Show results") %>
     <% end %>
     <br/>
     <div id="forecast-info" style="display: none">
