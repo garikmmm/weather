@@ -15,4 +15,7 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require selectize
+//= require react
+//= require react_ujs
+//= require components
 //= require_tree .

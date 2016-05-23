@@ -30,6 +30,9 @@ gem 'autoprefixer-rails'
 # use selctize.js for autocomplete
 gem 'selectize-rails', '~> 0.12.1'
 
+# React.js
+gem 'react-rails'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
