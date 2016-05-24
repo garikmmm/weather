@@ -1,16 +1,15 @@
 var ForecastForm = React.createClass({
     handleSubmit: function(e) {
         e.preventDefault();
-        var location_id = $("#react-location", ReactDOM.findDOMNode(this)).val();
+        var location_id = $("#react-location").val();
         var geolocation_method = $("#react-geolocation", ReactDOM.findDOMNode(this)).val();
         if (!location_id || !geolocation_method) {
             return false;
         }
         this.props.onForecastSubmit({location_id: location_id, geolocation_method: geolocation_method});
-        // this.setState({author: '', text: ''});
     },
     componentDidMount: function() {
-        $("#react-location", ReactDOM.findDOMNode(this)).selectize({
+        $("#react-location").selectize({
             valueField: 'id',
             labelField: 'name',
             searchField: 'name',
@@ -32,19 +31,20 @@ var ForecastForm = React.createClass({
     },
 
     componentWillUnmount: function() {
-        alert('Not implemented - componentWillUnmount');
-        return;
-        $(ReactDOM.findDOMNode(this)).selectize('destroy');
+        $('#react-location').selectize()[0].selectize.destroy();
     },
     render: function() {
         return (
             <form onSubmit={this.handleSubmit}>
+                <label for="react-location">Location:</label>
                 <select id="react-location"></select>
+                <label for="react-location">Geolocation method:</label>
                 <select id="react-geolocation">
                     <option value="1">Database</option>
                     <option value="2">Google Maps</option>
                 </select>
-                <input type="submit" value="Post" />
+                <br/>
+                <input type="submit" value="Show results" />
             </form>
         );
     }
@@ -53,7 +53,7 @@ var ForecastForm = React.createClass({
 var ForecastResultCurrentlyRow = React.createClass({
     render: function() {
         return (
-            <li class="list-group-item"><span class="badge">{this.props.rowValue}</span>{this.props.rowName}</li>
+            <li className="list-group-item"><span className="badge">{this.props.rowValue}</span>{this.props.rowName}</li>
         );
     }
 });

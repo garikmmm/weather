@@ -1,5 +1,6 @@
 <% environment.context_class.instance_eval { include Rails.application.routes.url_helpers} %>
-$(function() {
+
+var initializeSimpleVersion = function() {
     $('#forecast-form #location_id').selectize({
         valueField: 'id',
         labelField: 'name',
@@ -66,7 +67,7 @@ $(function() {
     $("#forecast-info").hide();
     alert(error);
   });
-});
+}
 
 function get_forecast_line_with_badge(text, value) {
   return '<li class="list-group-item"><span class="badge">' + value + '</span>' + text + '</li>';
@@ -86,4 +87,5 @@ function get_forecast_table_row(item) {
   html += '</td></tr>';
   return html;
 }
-
+$(document).ready(initializeSimpleVersion);
+$(document).on('page:load', initializeSimpleVersion);
